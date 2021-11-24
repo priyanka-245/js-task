@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Random Image Slider</title>
+    <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+    <div class="slider">
+        <div>
+            <div id="author"></div>
+            <img src='' alt='' id="img">
+        </div>
+
+    </div>
+    <div>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+        <span class="dot"></span>
+    </div>
+</body>
+<script>
+
+    const url = `https://picsum.photos/list`
+    var data;
+    async function getPic() {
+        const response = await fetch(url);
+        data = await response.json();
+    }
+
+    getPic();
+    var x = 0;
+
+    var imgs = document.getElementById('img');
+
+    function showImage() {
+        var a = Math.floor(Math.random() * data.length);
+        var dots = document.getElementsByClassName("dot");
+        x++;
+        if (x <= 10) {
+            var img = `https://picsum.photos/${a}`;
+            imgs.src = img;
+            document.getElementById("author").innerHTML = data[a].author;
+            for (i = 0; i < dots.length; i++) {
+                dots[i].className = dots[i].className.replace(" active", "");
+            }
+            dots[x - 1].className += " active";
+        }
+    }
+
+    setInterval(showImage, 2000);
+
+</script>
+
+</html>
