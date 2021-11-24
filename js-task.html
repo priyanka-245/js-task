@@ -14,18 +14,9 @@
             <img src='' alt='' id="img">
         </div>
 
-    </div>
-    <div>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
-        <span class="dot"></span>
+
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
 </body>
 <script>
@@ -35,29 +26,28 @@
     async function getPic() {
         const response = await fetch(url);
         data = await response.json();
+        showImage();
     }
 
     getPic();
-    var x = 0;
+    var x = 1;
+
+    function plusSlides(n) {
+        console.log(x);
+        showImage(x += n);
+    }
 
     var imgs = document.getElementById('img');
 
-    function showImage() {
+    function showImage(n) {
         var a = Math.floor(Math.random() * data.length);
         var dots = document.getElementsByClassName("dot");
-        x++;
-        if (x <= 10) {
-            var img = `https://picsum.photos/${a}`;
-            imgs.src = img;
-            document.getElementById("author").innerHTML = data[a].author;
-            for (i = 0; i < dots.length; i++) {
-                dots[i].className = dots[i].className.replace(" active", "");
-            }
-            dots[x - 1].className += " active";
-        }
+        x += 1;
+        var img = `https://picsum.photos/id/${a}/200/300`;
+        imgs.src = img;
+        document.getElementById("author").innerHTML = data[a].author;
     }
 
-    setInterval(showImage, 2000);
 
 </script>
 
