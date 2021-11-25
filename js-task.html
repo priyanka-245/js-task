@@ -5,21 +5,42 @@
     <meta charset="UTF-8">
     <title>Random Image Slider</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.css" />
 </head>
 
 <body>
-    <div class="slider">
-        <div>
-            <div id="author"></div>
-            <img src='' alt='' id="img">
+    <div class="main-slider-class">
+        <div class="slider">
+            <div class="slider-image">
+                <div id="author1" class="author-class"></div>
+                <img src='' alt='' id="img1">
+            </div>
+            <div class="slider-image">
+                <div id="author2" class="author-class"></div>
+                <img src='' alt='' id="img2">
+            </div>
+            <div class="slider-image">
+                <div id="author3" class="author-class"></div>
+                <img src='' alt='' id="img3">
+            </div>
+            <div class="slider-image">
+                <div id="author4" class="author-class"></div>
+                <img src='' alt='' id="img4">
+            </div>
+
         </div>
-
-
         <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
         <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"
+        integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.8.1/slick.min.js"></script>
 </body>
 <script>
+    $('.slider').slick({
+        slidesToShow: 4,
+        slidesToScroll: 4
+    });
 
     const url = `https://picsum.photos/list`
     var data;
@@ -37,17 +58,31 @@
         showImage(x += n);
     }
 
-    var imgs = document.getElementById('img');
+    var imgs1 = document.getElementById('img1');
+    var imgs2 = document.getElementById('img2');
+    var imgs3 = document.getElementById('img3');
+    var imgs4 = document.getElementById('img4');
 
     function showImage(n) {
         var a = Math.floor(Math.random() * data.length);
+        var b = Math.floor(Math.random() * data.length);
+        var c = Math.floor(Math.random() * data.length);
+        var d = Math.floor(Math.random() * data.length);
         var dots = document.getElementsByClassName("dot");
         x += 1;
-        var img = `https://picsum.photos/id/${a}/200/300`;
-        imgs.src = img;
-        document.getElementById("author").innerHTML = data[a].author;
+        var img1 = `https://picsum.photos/id/${a}/200/300`;
+        var img2 = `https://picsum.photos/id/${b}/200/300`;
+        var img3 = `https://picsum.photos/id/${c}/200/300`;
+        var img4 = `https://picsum.photos/id/${d}/200/300`;
+        imgs1.src = img1;
+        imgs2.src = img2;
+        imgs3.src = img3;
+        imgs4.src = img4;
+        document.getElementById("author1").innerHTML = data[a].author;
+        document.getElementById("author2").innerHTML = data[b].author;
+        document.getElementById("author3").innerHTML = data[c].author;
+        document.getElementById("author4").innerHTML = data[d].author;
     }
-
 
 </script>
 
