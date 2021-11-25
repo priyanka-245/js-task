@@ -4,20 +4,20 @@ body {
       }
 
   .slider {
-      height: 250px;
+      width: 70%;
       margin: auto;
       position: relative;
       display: block;
       place-items: center;
-      left: 3%;
   }
 
-  .slide-track {
-      width: 100%;
+  .slider-track {
+      display: flex;
+      overflow: hidden;
   }
 
   .slide {
-      height: 200px;
+      /* height: 200px; */
       display: inline-block;
       align-items: center;
       padding: 15px;
@@ -28,7 +28,7 @@ body {
   .next {
       cursor: pointer;
       position: absolute;
-      top: 70%;
+      top: 50%;
       width: auto;
       padding: 16px;
       margin-top: -22px;
@@ -41,11 +41,11 @@ body {
   }
 
   .prev {
-      left: 50px;
+      left: -20px;
   }
 
   .next {
-      right: 143px;
+      right: -10px;
       border-radius: 3px 0 0 3px;
   }
 

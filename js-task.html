@@ -9,89 +9,40 @@
 
 <body>
     <div class="slider">
-        <div class="slider-track">
-            <div class="slide">
-                <div id="author1" class="author-class"></div>
-                <img src='' alt='' id="img1">
-            </div>
-            <div class="slide">
-                <div id="author2" class="author-class"></div>
-                <img src='' alt='' id="img2">
-            </div>
-            <div class="slide">
-                <div id="author3" class="author-class"></div>
-                <img src='' alt='' id="img3">
-            </div>
-            <div class="slide">
-                <div id="author4" class="author-class"></div>
-                <img src='' alt='' id="img4">
-            </div>
-            <div class="slide">
-                <div id="author5" class="author-class"></div>
-                <img src='' alt='' id="img5">
-            </div>
-            <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
-            <a class="next" onclick="plusSlides(1)">&#10095;</a>
+        <div class="slider-track" id="slider">
         </div>
+        <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+        <a class="next" onclick="plusSlides(1)">&#10095;</a>
     </div>
 </body>
 <script>
 
     const url = `https://picsum.photos/list`
-    var data;
+    var data = [];
     async function getPic() {
         const response = await fetch(url);
-        data = await response.json();
+        const result = await response.json();
+        for (var i = 0; i < 10; i++) {
+            data.push(result[Math.floor(Math.random() * result.length)]);
+        }
         showImage();
     }
 
     getPic();
-    var x = 1;
-    var count = 1;
-    var prev = 0;
-    var clicked = 0;
-    function plusSlides(n) {
-        if (n === 1) {
-            clicked ++;
-            count += 1;
-            showImage(x += n);
-        } else {
-            prev++;
-            count++;
-            showImage(x += n);
-
-        }
-    }
-    
-    var imgs1 = document.getElementById('img1');
-    var imgs2 = document.getElementById('img2');
-    var imgs3 = document.getElementById('img3');
-    var imgs4 = document.getElementById('img4');
-    var imgs5 = document.getElementById('img5');
 
     function showImage(n) {
-        var a = Math.floor(Math.random() * data.length);
-        var b = Math.floor(Math.random() * data.length);
-        var c = Math.floor(Math.random() * data.length);
-        var d = Math.floor(Math.random() * data.length);
-        var e = Math.floor(Math.random() * data.length);
-        if (count <= 2 || prev == 1 ) {
-            var img1 = `https://picsum.photos/id/${a}/200/300`;
-            var img2 = `https://picsum.photos/id/${b}/200/300`;
-            var img3 = `https://picsum.photos/id/${c}/200/300`;
-            var img4 = `https://picsum.photos/id/${d}/200/300`;
-            var img5 = `https://picsum.photos/id/${e}/200/300`;
-            imgs1.src = img1;
-            imgs2.src = img2;
-            imgs3.src = img3;
-            imgs4.src = img4;
-            imgs5.src = img5;
-            document.getElementById("author1").innerHTML = data[a].author;
-            document.getElementById("author2").innerHTML = data[b].author;
-            document.getElementById("author3").innerHTML = data[c].author;
-            document.getElementById("author4").innerHTML = data[d].author;
-            document.getElementById("author5").innerHTML = data[e].author;
+        var html = ''
+        for (let i = 0; i < data.length; i++) {
+            html += `<div class="slide">
+                        <div id="author1" class="author-class">${data[i].author}</div>
+                        <img src="https://picsum.photos/id/${data[i].id}/200/300" alt=''>
+                    </div>`
         }
+        document.getElementById('slider').innerHTML = html
+    }
+
+    function plusSlides(dir) {
+        document.getElementById('slider').scrollLeft += dir * 200
     }
 
 </script>
